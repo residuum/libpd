@@ -87,13 +87,13 @@ namespace LibPDBinding.Managed
 			Inputs = inputChannels;
 			Outputs = outputChannels;
 			SampleRate = sampleRate;
+			_messaging = new Messaging (this, _initialized);
 			if (!_initialized) {
 				General.libpd_init ();
 				_initialized = true;
 			}
 			_thisInstance = MultiInstance.new_instance ();
 			Activate ();
-			_messaging = new Messaging (this);
 			_midi = new Midi (this);
 			foreach (string path in searchPaths ?? Enumerable.Empty<string>()) {
 				General.add_to_search_path (path);

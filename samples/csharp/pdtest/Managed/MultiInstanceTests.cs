@@ -57,10 +57,11 @@ namespace LibPDBindingTest.Managed
 				}
 			};
 			_instance1.Messaging.Send (receiver, new Float (42));
+			_instance2.Messaging.Send (receiver, new Float (23));
 			_instance1.Messaging.Unbind (receiver);
 			_instance2.Messaging.Unbind (receiver);
 			Assert.AreEqual (42, value1);
-			Assert.AreEqual (0, value2);
+			Assert.AreEqual (23, value2);
 
 		}
 

@@ -28,7 +28,6 @@ namespace LibPDBindingTest.Managed
 		[Test]
 		public virtual void LoadbangTest ()
 		{
-			_pd.Messaging.Bind ("foo");
 			string value = "";
 			_pd.Messaging.Print += delegate(object sender, PrintEventArgs e) {
 				value += e.Symbol.Value;

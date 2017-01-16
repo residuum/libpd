@@ -14,10 +14,12 @@ namespace LibPDBinding.Managed
 	{
 		readonly Pd _pd;
 
-		internal Messaging (Pd pd)
+		internal Messaging (Pd pd, bool initialized)
 		{
 			_pd = pd;
-			SetupHooks ();
+			if (!initialized) {
+				SetupHooks ();
+			}
 		}
 
 		~Messaging ()
