@@ -103,6 +103,7 @@
     <Compile Include="Native\Defines.cs" />
     <Compile Include="Native\Midi.cs" />
     <Compile Include="Native\Messaging.cs" />
+    <Compile Include="Native\MultiInstance.cs" />
     <Compile Include="Native\General.cs" />
     <Compile Include="Native\Audio.cs" />
   </ItemGroup>
