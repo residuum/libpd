@@ -32,19 +32,9 @@ namespace LibPDBindingTest.Managed
 		[TearDown]
 		public void Cleanup ()
 		{
-			//	_patch1.Dispose ();
-			//	_patch2.Dispose ();
-			//	_instance1.Dispose ();
-			//	_instance2.Dispose ();
-		}
-
-		[Test]
-		public virtual void DisposeTest ()
-		{
-			// This works
-			_instance1.Dispose ();
+			_patch1.Dispose ();
 			_patch2.Dispose ();
-			// This crashes with AccessViolationExcetion, because _patch2 has been Dispose()d
+			_instance1.Dispose ();
 			_instance2.Dispose ();
 		}
 

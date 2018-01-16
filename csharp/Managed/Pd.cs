@@ -199,7 +199,7 @@ namespace LibPDBinding.Managed
 				return null;
 			}
 			var ptr = General.openfile (Path.GetFileName (path), Path.GetDirectoryName (path));
-			return new Patch (ptr);
+			return new Patch (ptr, this);
 		}
 
 		[MethodImpl (MethodImplOptions.Synchronized)]
