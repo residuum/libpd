@@ -119,7 +119,7 @@ namespace LibPDBinding.Managed
 			Messaging.Dispose ();
 			Midi.Dispose ();
 			MultiInstance.free_instance (_thisInstance);
-            _currentInstance = IntPtr.Zero;
+			_currentInstance = IntPtr.Zero;
 		}
 
 		static bool _initialized;

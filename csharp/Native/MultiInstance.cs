@@ -21,6 +21,6 @@ namespace LibPDBinding.Native
 		public static extern IntPtr get_instance (int index);
 
 		[DllImport (Defines.DllName, EntryPoint = "libpd_num_instances", CallingConvention = Defines.CallingConvention)]
-		public static extern int num_instance ();
+		public static extern int num_instances ();
 	}
 }
