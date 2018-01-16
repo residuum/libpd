@@ -11,10 +11,11 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 1 128 -1 200 140 1 0 0;
 #X restore 41 251 graph;
-#X obj 57 139 loadbang;
-#X obj 57 161 tabwrite~ array 1;
+#X obj 350 71 notein;
+#X obj 350 93 noteout;
 #X connect 0 0 1 0;
 #X connect 2 0 3 0;
-#X connect 2 0 6 0;
 #X connect 2 1 3 1;
 #X connect 5 0 6 0;
+#X connect 5 1 6 1;
+#X connect 5 2 6 2;

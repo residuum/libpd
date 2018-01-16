@@ -65,6 +65,38 @@ namespace LibPDBindingTest.Managed
 		}
 
 		[Test]
+		public virtual void DecoupledMidiTest ()
+		{
+			int channel = 1;
+			int pitch = 64;
+			int velocity = 32;
+			int receivedChannel1 = 0;
+			int receivedPitch1 = 0;
+			int receivedVelocity1 = 0;
+			_instance1.Midi.NoteOn += delegate (object sender, NoteOnEventArgs args) {
+				receivedChannel1 = args.Channel;
+				receivedPitch1 = args.Pitch;
+				receivedVelocity1 = args.Velocity;
+			};
+			int receivedChannel2 = 0;
+			int receivedPitch2 = 0;
+			int receivedVelocity2 = 0;
+			_instance2.Midi.NoteOn += delegate (object sender, NoteOnEventArgs args) {
+				receivedChannel2 = args.Channel;
+				receivedPitch2 = args.Pitch;
+				receivedVelocity2 = args.Velocity;
+			};
+			_instance1.Midi.SendNoteOn (channel, pitch, velocity);
+			_instance2.Midi.SendNoteOn (channel + 1, pitch + 1, velocity + 1);
+			Assert.AreEqual (channel, receivedChannel1);
+			Assert.AreEqual (pitch, receivedPitch1);
+			Assert.AreEqual (velocity, receivedVelocity1);            
+			Assert.AreEqual (channel + 1, receivedChannel2);
+			Assert.AreEqual (pitch + 1, receivedPitch2);
+			Assert.AreEqual (velocity + 1, receivedVelocity2);            
+		}
+
+		[Test]
 		public virtual void DecoupledArrayTest ()
 		{
 			int arraySize = 128;
