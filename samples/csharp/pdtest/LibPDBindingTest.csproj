@@ -79,7 +79,6 @@
     <Compile Include="LibraryLoader\LinuxDllLoader.cs" />
     <Compile Include="LibraryLoader\WindowsDllLoader.cs" />
     <Compile Include="Managed\MidiTests.cs" />
-    <Compile Include="Managed\MultiInstanceTests.cs" />
     <Compile Include="Managed\PatchTests.cs" />
     <Compile Include="Managed\PdTests.cs" />
     <Compile Include="Managed\PdArrayTests.cs" />
@@ -88,6 +87,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Managed\CApiTests.cs" />
+    <Compile Include="MuliInstance\MidiTests.cs" />
+    <Compile Include="MuliInstance\MessagingTests.cs" />
+    <Compile Include="MuliInstance\PdArrayTests.cs" />
+    <Compile Include="MuliInstance\AudioTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\csharp\LibPDBinding.csproj">
@@ -103,4 +106,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <ItemGroup>
+    <Folder Include="MuliInstance\" />
+  </ItemGroup>
 </Project>
