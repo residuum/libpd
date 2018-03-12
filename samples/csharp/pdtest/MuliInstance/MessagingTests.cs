@@ -90,28 +90,61 @@ namespace LibPDBindingTest.MultiInstance
 			};
 			_instance2.Messaging.Send (_receiver, new Float (23));
 			Assert.AreEqual (0, value1);
-		}
+        }
 
-		[Test]
-		public virtual void DataShouldBeReceivedAtTheCorrectInstance ()
-		{
-			float value1 = 0;
-			float value2 = 0;
-			_instance1.Messaging.Float += delegate(object sender, FloatEventArgs e) {
-				if (e.Receiver == _receiver) {
-					value1 = e.Float.Value;
-				}
-			};
-			_instance2.Messaging.Float += delegate(object sender, FloatEventArgs e) {
-				if (e.Receiver == _receiver) {
-					value2 = e.Float.Value;
-				}
-			};
-			_instance1.Messaging.Send (_receiver, new Float (42));
-			_instance2.Messaging.Send (_receiver, new Float (23));
-			Assert.AreEqual (42, value1);
-			Assert.AreEqual (23, value2);
-		}
-	}
+        [Test]
+        public virtual void DataShouldBeReceivedAtTheCorrectInstanceOnlyOnce ()
+        {
+            float value1 = 0;
+            float value2 = 0;
+            _instance1.Messaging.Float += delegate (object sender, FloatEventArgs e) {
+                if (e.Receiver == _receiver)
+                {
+                    value1 = e.Float.Value;
+                }
+            };
+            _instance2.Messaging.Float += delegate (object sender, FloatEventArgs e) {
+                if (e.Receiver == _receiver)
+                {
+                    value2 = e.Float.Value;
+                }
+            };
+            _instance1.Messaging.Send (_receiver, new Float (42));
+            _instance2.Messaging.Send (_receiver, new Float (23));
+            Assert.AreEqual (42, value1);
+            Assert.AreEqual (23, value2);
+        }
+
+
+        [Test]
+        public virtual void DataShouldBeReceivedAtTheCorrectInstance ()
+        {
+            string sendSymbol = "bar";
+            string receiveSymbol = "foo";
+            _instance1.Messaging.Bind(sendSymbol);
+            _instance2.Messaging.Bind(sendSymbol);
+            float value1 = 0;
+            float value2 = 0;
+            _instance1.Messaging.Float += delegate (object sender, FloatEventArgs e) {
+                if (e.Receiver == sendSymbol)
+                {
+                    value1 = e.Float.Value;
+                }
+            };
+            _instance2.Messaging.Float += delegate (object sender, FloatEventArgs e) {
+                if (e.Receiver == sendSymbol)
+                {
+                    value2 = e.Float.Value;
+                }
+            };
+            _instance1.Messaging.Send (receiveSymbol, new Bang ());
+            Assert.AreEqual (_patch1.DollarZero, value1);
+            Assert.AreEqual (_patch1.DollarZero, value2);
+            _instance2.Messaging.Send (receiveSymbol, new Bang ());
+            Assert.AreEqual (_patch2.DollarZero, value1);
+            Assert.AreEqual (_patch2.DollarZero, value2);
+            _instance1.Messaging.Unbind (sendSymbol);
+            _instance2.Messaging.Unbind (sendSymbol);
+        }
+    }
 }
-
