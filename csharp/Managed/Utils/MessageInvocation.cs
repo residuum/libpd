@@ -71,6 +71,10 @@ namespace LibPDBinding.Managed.Utils
 
 		public static void SendList (string receiver, IAtom[] args)
 		{
+			int startMessage = Native.Messaging.start_message (args.Length);
+			if (startMessage != 0) {
+				throw new PdProcessException (startMessage, "start_message");
+			}
 			SendArgs (args);
 			int finish = Native.Messaging.finish_list (receiver);
 			if (finish != 0) {
@@ -80,10 +84,6 @@ namespace LibPDBinding.Managed.Utils
 
 		static void SendArgs (IAtom[] args)
 		{
-			int startMessage = Native.Messaging.start_message (args.Length);
-			if (startMessage != 0) {
-				throw new PdProcessException (startMessage, "start_message");
-			}
 			foreach (IAtom arg in args) {
 				if (arg is Float) {
 					Native.Messaging.add_float (((Float)arg).Value);

@@ -17,7 +17,21 @@ namespace LibPDBinding.Managed
 	/// </summary>
 	public sealed class Pd : IDisposable
 	{
-		/// <summary>
+
+	    public static int NumberOfInstances
+	    {
+	        get
+	        {
+	            if (!_initialized)
+	            {
+	                return 0;
+	            }
+
+	            return MultiInstance.num_instances() - 1;
+	        }
+	    }
+
+	    /// <summary>
 		/// Gets the number of input channels.
 		/// </summary>
 		public int Inputs { get; private set; }

@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace LibPDBindingTest.MultiInstance
 {
-	[TestFixture]
+    [TestFixture]
 	public class PdArrayTests
 	{
 		Pd _instance1;
